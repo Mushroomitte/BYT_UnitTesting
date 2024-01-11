@@ -22,6 +22,7 @@ public class AccountTest {
 		SweBank.deposit("Alice", new Money(1000000, SEK));
 	}
 
+	//Check if the timed payment is added and removed properly
 	@Test
 	public void testAddRemoveTimedPayment() {
 		assertFalse(testAccount.timedPaymentExists("payment"));
@@ -31,6 +32,7 @@ public class AccountTest {
 		assertFalse(testAccount.timedPaymentExists("payment"));
 	}
 
+	//Verify that the tick method advances timed payments as expected.
 	@Test
 	public void testTimedPayment() throws AccountDoesNotExistException {
 
@@ -60,7 +62,8 @@ public class AccountTest {
 		assertEquals(Integer.valueOf(1001000), SweBank.getBalance("Alice"));
 	}
 
-
+	
+	//Ensure that the withdraw method handles operations correctly.
 	@Test
 	public void testAddWithdraw() {
 		testAccount.deposit(new Money(9500, SEK));
@@ -68,7 +71,8 @@ public class AccountTest {
 		testAccount.withdraw(new Money(300, SEK));
 		assertEquals(Integer.valueOf(10009200), testAccount.getBalance());
 	}
-
+	
+	
 
 	@Test
 	public void testGetBalance() {

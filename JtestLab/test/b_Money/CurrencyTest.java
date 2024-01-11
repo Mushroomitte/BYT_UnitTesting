@@ -39,14 +39,14 @@ public class CurrencyTest {
 	
 	@Test
 	public void testGlobalValue() {
-		// Check if globalValue returns the correct value for different Currency instances.
+		//Validate the conversion from the current currency to the universal currency.
         assertEquals(1500, SEK.universalValue(10000).intValue());
         assertEquals(2000, DKK.universalValue(10000).intValue());
 	}
 	
 	@Test
 	public void testValueInThisCurrency() {
-		// Check if valueInThisCurrency returns the correct value for different Currency instances.
+		//Check if the conversion from another currency to the current currency works.
 		Integer SEKToDKK = DKK.valueInThisCurrency(1000, SEK);
 		Integer DKKToEUR = EUR.valueInThisCurrency(750, DKK);
 		Integer EURToSEK = SEK.valueInThisCurrency(100, EUR);

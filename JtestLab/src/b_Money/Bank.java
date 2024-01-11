@@ -25,7 +25,7 @@ public class Bank {
 		return name;
 	}
 
-
+	//Added a getAccFromList method to retrieve an account from the list.
 	public Account getAccFromList(String accountID) {
 		return accountlist.get(accountID);
 	}
@@ -43,6 +43,7 @@ public class Bank {
 	 * @param accountid The ID of the account
 	 * @throws AccountExistsException If the account already exists
 	 */
+	// Modified the openAccount method to correctly create a new Account.
 	public void openAccount(String accountid) throws AccountExistsException {
 		if (accountlist.containsKey(accountid)) {
 			throw new AccountExistsException();
@@ -60,6 +61,7 @@ public class Bank {
 	 * @param money Money to deposit.
 	 * @throws AccountDoesNotExistException If the account does not exist
 	 */
+    //Updated the deposit method to handle AccountDoesNotExistException properly.
 	public void deposit(String accountid, Money money) throws AccountDoesNotExistException {
 		if (!accountlist.containsKey(accountid)) {
 			throw new AccountDoesNotExistException();
@@ -75,6 +77,7 @@ public class Bank {
 	 * @param money Money to withdraw
 	 * @throws AccountDoesNotExistException If the account does not exist
 	 */
+	//Updated the withdraw method to handle AccountDoesNotExistException properly.
 	public void withdraw(String accountid, Money money) throws AccountDoesNotExistException {
 		if (!accountlist.containsKey(accountid)) {
 			throw new AccountDoesNotExistException();
@@ -114,12 +117,13 @@ public class Bank {
 		}
 		else {
 			if (this.getAccFromList(fromaccount).getBalance() < amount.getAmount()) {
+				//Improved error messages in case of insufficient balance during transfers.
 				System.err.println("account " + this.getAccFromList(fromaccount).getAccountName() + " has only " + this.getAccFromList(fromaccount).getBalance() + " (you want to withdraw " + amount.getAmount() + ")");
 			} else {
 				accountlist.get(fromaccount).withdraw(amount);
 				tobank.accountlist.get(toaccount).deposit(amount);
 				System.out.println("transfer from " + fromaccount + " to " + toaccount + " amount "
-						+ amount);
+						+ amount); 
 			}
 
 		}

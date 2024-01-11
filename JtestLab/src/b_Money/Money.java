@@ -38,6 +38,7 @@ public class Money implements Comparable {
 	 * above is actually represented as the integer 1050
 	 *  @return String representing the amount of Money.
 	 */
+	//Adjusted toString method to represent the amount correctly.
 	public String toString() {
 	    BigDecimal amountInDecimal = BigDecimal.valueOf(this.amount).scaleByPowerOfTen(-2);
 	    return amountInDecimal + " " + this.currency.getName();
@@ -47,6 +48,7 @@ public class Money implements Comparable {
 	 * Gets the universal value of the Money, according the rate of its Currency.
 	 * @return The value of the Money in the "universal currency".
 	 */
+	//Implemented method 
 	public Integer universalValue() {
 		return this.currency.universalValue(this.amount);
 	}
@@ -56,6 +58,7 @@ public class Money implements Comparable {
 	 * @param other The other Money that is being compared to this Money.
 	 * @return A Boolean indicating if the two monies are equal.
 	 */
+	//Implemented method
     public boolean equals(Object other) {
         if (this == other) {
             return true;
@@ -76,7 +79,7 @@ public class Money implements Comparable {
 	 * @return A new Money with the same Currency as this Money, representing the added value of the two.
 	 * (Remember to convert the other Money before adding the amounts)
 	 */
-
+	//Implemented method
     public Money add(Money other) {
         if (!this.getCurrency().equals(other.getCurrency())) {
             int convertedAmount = other.getCurrency().universalValue(other.getAmount());
@@ -96,6 +99,7 @@ public class Money implements Comparable {
 	 * @return A new Money with the same Currency as this Money, representing the subtracted value.
 	 * (Again, remember converting the value of the other Money to this Currency)
 	 */
+	//Implemented method to subtract money from currecny amount
     public Money sub(Money other) {
         if (!this.getCurrency().equals(other.getCurrency())) {
             int convertedAmount = other.getCurrency().universalValue(other.getAmount());
@@ -112,6 +116,7 @@ public class Money implements Comparable {
 	 * Check to see if the amount of this Money is zero or not
 	 * @return True if the amount of this Money is equal to 0.0, False otherwise
 	 */
+	//Implemented method to check if amount is 0
 	public Boolean isZero() {
         return this.amount == 0;
 	}
@@ -119,6 +124,7 @@ public class Money implements Comparable {
 	 * Negate the amount of money, i.e. if the amount is 10.0 SEK the negation returns -10.0 SEK
 	 * @return A new instance of the money class initialized with the new negated money amount.
 	 */
+	//Implemented method to negate the amount of money
 	public Money negate() {
         return new Money(-this.amount, this.currency);
 	}
@@ -132,6 +138,7 @@ public class Money implements Comparable {
 	 * A negative integer if this Money is less valuable than the other Money.
 	 * A positive integer if this Money is more valuiable than the other Money.
 	 */
+	//Implemented method 
 	public int compareTo(Object other) {
         if (this == other) {
             return 0;

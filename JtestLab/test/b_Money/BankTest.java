@@ -38,9 +38,11 @@ public class BankTest {
         assertEquals(SEK, Nordea.getCurrency());
         assertEquals(DKK, DanskeBank.getCurrency());
 	}
-
+	
+	
 	@Test
 	public void testOpenAccount() throws AccountExistsException, AccountDoesNotExistException {
+		//Ensure that opening an account works as expected
         SweBank.openAccount("Alice");
         assertTrue(SweBank.getBalance("Alice") == 0);
 
@@ -50,8 +52,10 @@ public class BankTest {
         assertTrue(DanskeBank.getBalance("Yohan") == 0);
 	}
 
+	
 	@Test
 	 public void testDeposit() throws AccountDoesNotExistException {
+		 //Verify that deposits are handled correctly
         SweBank.deposit("Bob", new Money(100, SEK));
         assertEquals(Integer.valueOf(100), SweBank.getBalance("Bob"));
 
@@ -62,8 +66,10 @@ public class BankTest {
         }
     }
 
+	
 	@Test
 	public void testWithdraw() throws AccountDoesNotExistException {
+		//Verify that withdraws are handled correctly
         SweBank.deposit("Ulrika", new Money(100, SEK));
         SweBank.withdraw("Ulrika", new Money(50, SEK));
         assertEquals(Integer.valueOf(50), SweBank.getBalance("Ulrika"));
@@ -84,6 +90,7 @@ public class BankTest {
 	
 	@Test
 	 public void testGetBalance() throws AccountDoesNotExistException {
+		 //Verify that getBalance() shows and processes balance correctly
         SweBank.deposit("Bob", new Money(100, SEK));
         int balanceBobSwebank = SweBank.getBalance("Bob");
         int balanceBobNordea = Nordea.getBalance("Bob");
@@ -99,6 +106,7 @@ public class BankTest {
 	
 	@Test
 	public void testTransfer() throws AccountDoesNotExistException {
+		//Check if transfers between accounts and banks are processed correctly
         SweBank.deposit("Bob", new Money(150, SEK));
         SweBank.transfer("Bob", "Ulrika", new Money(75, SEK));
         assertEquals(new Integer(75), SweBank.getBalance("Bob"));
@@ -120,6 +128,7 @@ public class BankTest {
 	
 	@Test
 	public void testTimedPayment() throws AccountDoesNotExistException {
+		//Check if timed payment is processed correctly 
         SweBank.deposit("Bob", new Money(100, SEK));
 
         SweBank.addTimedPayment("Bob", "payment1", 2, 0, new Money(20, SEK), SweBank, "Ulrika");

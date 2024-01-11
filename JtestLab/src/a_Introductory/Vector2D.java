@@ -14,11 +14,14 @@ public class Vector2D {
 		this.y = p2.y - p1.y;
 	}
 	
+	//Fixed the error with the formula (v.x) -> (v.y)
 	public int dotProduct(Vector2D v) {
 		return (x * v.x) + (y * v.y);
 	}
 	
+	//
 	public boolean isOrthogonalTo(Vector2D v) {
+		// Fixed the error in the dotProduct formula
 		return (dotProduct(v) == 0);
 	}
 }

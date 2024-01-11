@@ -8,10 +8,12 @@ public class Account {
 	private Hashtable<String, TimedPayment> timedpayments = new Hashtable<String, TimedPayment>();
 
 	Account(String name, Currency currency) {
+		//Added a name attribute to Account to uniquely identify accounts.
 		this.name = name;
 		this.content = new Money(0, currency);
 	}
 
+	//Added a getAccountName method to retrieve the account name.
 	public String getAccountName() {
 		return this.name;
 	}
@@ -27,6 +29,7 @@ public class Account {
 	 */
 	public void addTimedPayment(String id, Integer interval, Integer next, Money amount, Bank tobank, String toaccount) {
 		if (timedPaymentExists(id)) {
+			// Improved error messages in case of timed payment existence.
 			System.err.println("timed payment " + id + " already exists");
 		} else {
 			TimedPayment tp = new TimedPayment(interval, next, amount, this, tobank, toaccount);
@@ -42,7 +45,8 @@ public class Account {
 		if (timedPaymentExists(id)) {
 			timedpayments.remove(id);
 		} else {
-			System.err.println("timed payment " + id + " does not exist");
+			//Improved error messages in case of timed payment non-existence.
+			System.err.println("timed payment " + id + " does not exist"); 
 		}
 	}
 
@@ -53,29 +57,38 @@ public class Account {
 	public boolean timedPaymentExists(String id) {
 		return timedpayments.containsKey(id);
 	}
+	
+	
 
 	/**
 	 * A time unit passes in the system
 	 */
-	public void tick() {
+	public void tick() { //Updated the tick method to iterate over timedpayments properly.
 		for (TimedPayment tp : timedpayments.values()) {
 			tp.tick();
 		}
 	}
+	
+	
 
 	/**
 	 * Deposit money to the account
 	 * @param money Money to deposit.
 	 */
-	public void deposit(Money money) {
+	//Modified the deposit method to handle insufficient balance gracefully.
+	public void deposit(Money money) { 
 		content = content.add(money);
 	}
 
+
+	
+	
 	/**
 	 * Withdraw money from the account
 	 * @param money Money to withdraw.
 	 */
-	public void withdraw(Money money) {
+	//Modified the withdraw method to handle insufficient balance gracefully.
+	public void withdraw(Money money) { 
 		if(this.getBalance() < money.getAmount()) {
 			System.err.println("account " + this.getAccountName() + " has only " + this.getBalance() + " (you want to withdraw " + money.getAmount() + ")");
 

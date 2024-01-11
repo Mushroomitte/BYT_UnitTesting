@@ -25,6 +25,7 @@ public class MoneyTest {
 
 	@Test
 	public void testGetAmount() {
+		// Check if getAmount() returns the correct amount compared to int value
 		assertEquals(Integer.valueOf(10000), SEK100.getAmount());
 		assertEquals(Integer.valueOf(1000), EUR10.getAmount());
 		assertEquals(Integer.valueOf(20000), SEK200.getAmount());
@@ -69,7 +70,7 @@ public class MoneyTest {
 
 	@Test
 	public void testEqualsMoney() {
-		// Check if equalsMoney returns the correct result for different Money instances.
+		//Validate the equality check for Money objects.
 		Money testSek = new Money(10000, SEK);
 		Money testEur = new Money(1000, EUR);
 		assertTrue(SEK100.equals(testSek));
